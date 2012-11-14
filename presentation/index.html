@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Clojure Testdrive by Albert Latacz</title>
+
+    <meta name="description" content="Clojure Testdrive">
+    <meta name="author" content="Albert Latacz">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="plugin/highlight/styles/monokai.css"/>
+    <!--<link rel="stylesheet" href="plugin/highlight/styles/ascetic.css"/>-->
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write( '
+        <link rel="stylesheet"
+              href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css"
+              type="text/css" media="print">
+        ' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+
+<section>
+    <img src="img/clojure-logo.png" alt="Clojure Testdrive" height="250" width="250"/>
+
+    <p style="font-size: 2em">(testdrive &nbsp;:clojure)</p>
+    <br/>
+
+    <p style="font-size: 1em">Introduction to functional programming in Clojure</p>
+    <br/>
+    <br/>
+
+    <p style="font-size: 0.5em">Created by Albert Latacz &nbsp;&nbsp;/&nbsp; <a
+            href="https://twitter.com/albertlatacz">@albertlatacz</a></p>
+</section>
+
+<section>
+    <h2><font color="#13daec">R</font>ead-<font color="#13daec">E</font>val-<font color="#13daec">P</font>rint <font
+            color="#13daec">L</font>oop</h2>
+
+    <ul>
+        <li>LightTable (<a href="http://app.kodowa.com/playground">http://app.kodowa.com/playground</a>)
+            <pre>(use 'clojure.repl)</pre>
+        </li>
+        <br>
+
+        <li>Cljr (<a href="https://github.com/liebke/cljr">https://github.com/liebke/cljr</a>)
+            <pre><code>java -jar cljr-installer.jar</code></pre>
+        </li>
+        <br>
+
+        <li>Clojure (<a href="http://clojure.org/downloads">http://clojure.org/downloads</a> )
+            <pre><code>java -cp clojure-1.4.0.jar clojure.main</code></pre>
+        </li>
+        <br>
+
+
+        <li>TryCojure (<a href="http://tryclj.com/">http://tryclj.com/</a>)</li>
+    </ul>
+
+</section>
+
+<section>
+
+    <h2>Functions</h2>
+    <blockquote>
+        It is better to have 100 functions operate on one data abstraction than 10 functions on 10 data structures.
+        -Rich Hickey in 2007
+    </blockquote>
+    <br>
+
+    <blockquote>
+        It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures.
+        -Alan Perlis in 1982
+    </blockquote>
+    <br>
+
+    <blockquote>
+        (quote), (atom), (eq), (cons), (car), (cdr) and (cond)! Damn, I love LISP!
+        -John McCarthy in 1960
+    </blockquote>
+
+</section>
+
+<section>
+
+    <h2>Clojure is...</h2>
+    <ul>
+        <li>modern LISP dialect for JVM</li>
+        <br>
+
+        <li>functional</li>
+        <br>
+
+        <li>dynamic (read-eval-print loop and data types)</li>
+        <br>
+
+        <li>homoiconic (code is data)</li>
+        <br>
+
+        <li>immutable and persistent</li>
+        <br>
+
+        <li>lazy</li>
+    </ul>
+
+</section>
+
+
+<section>
+    <section>
+        <h2>Let's ride!</h2>
+        <ul>
+            <li>Data types</li>
+            <br>
+
+            <li>Data structures</li>
+            <br>
+
+            <li>Functions and vars</li>
+            <br>
+
+            <li>More functions</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Data types</h2>
+        <br>
+        <pre style="font-size: 1em;text-align: center"> 10, 22.5, 36786N, 3.141M<span
+                style="color:#75715E">  ; numeric</span></pre>
+        <pre style="font-size: 1em;text-align: center">true, false<span
+                style="color:#75715E">  ; bool</span></pre>
+        <pre style="font-size: 1em;text-align: center">\c \h<span
+                style="color:#75715E">   ; character</span></pre>
+        <pre style="font-size: 1em;text-align: center">"hello world!"<span
+                style="color:#75715E">  ; strings</span></pre>
+        <pre style="font-size: 1em;text-align: center"> 3/7, 9/55<span
+                style="color:#75715E">  ; rational</span></pre>
+        <pre style="font-size: 1em;text-align: center">:hello-world<span
+                style="color:#75715E">  ; keywords</span></pre>
+        <pre style="font-size: 1em;text-align: center">'hello-world<span
+                style="color:#75715E">  ; symbols</span></pre>
+        <pre style="font-size: 1em;text-align: center">nil<span
+                style="color:#75715E">  ; null</span></pre>
+    </section>
+
+    <section>
+        <h2>Data structures</h2>
+        <br>
+        <pre style="font-size: 1em;text-align: center">[1 2 3] <span
+                style="color:#75715E">  ; vector</span></pre>
+        <pre style="font-size: 1em;text-align: center">'(1 2 3) <span
+                style="color:#75715E">  ; list</span></pre>
+        <pre style="font-size: 1em;text-align: center">#{1 2 3} <span
+                style="color:#75715E">  ; set</span></pre>
+        <pre style="font-size: 1em;text-align: center">{:a 1 :b 2} <span
+                style="color:#75715E">  ; map</span></pre>
+    </section>
+
+    <section>
+        <h2>Functions and Vars</h2>
+        <br>
+        <b>Nearly everything is a function!</b>
+        <pre style="font-size: 1.2em;text-align: center"><code class="clojure">(foo arg1 arg2 ... argn)</code></pre>
+        <br>
+
+        <pre style="font-size: 0.8em;text-align: center"><code class="clojure">(fn [x y] (+ x y)) ; anonymous function</code></pre>
+        <pre style="font-size: 0.8em;text-align: center"><code class="clojure">(defn add [x y] (+ x y)) ; named function</code></pre>
+        <pre style="font-size: 0.8em;text-align: center"><code class="clojure">(prn "Hello world!") ; invoke function</code></pre>
+        <br>
+
+        <pre style="font-size: 0.8em;text-align: center"><code class="clojure">(def pi 3.14159265359M) ; global var</code></pre>
+    </section>
+
+    <section>
+        <h2>More functions...</h2>
+        <br>
+
+        <pre style="font-size: 0.8em;text-align: center"><code class="clojure">(map odd? [1 2 3 4 5])</code></pre>
+        <pre style="font-size: 0.8em;text-align: center"><code class="clojure">(filter odd? [1 2 3 4 5])</code></pre>
+        <pre style="font-size: 0.8em;text-align: center"><code class="clojure">(reduce + [1 2 3 4 5])</code></pre><br>
+
+        <pre style="font-size: 1em;text-align: center"><code class="clojure">(or (doc xor) (find-doc "xor"))</code></pre>
+        <br>
+
+        <pre style="font-size: 0.5em;text-align: center"><code class="clojure">(concat) (cycle) (distinct) (drop) (drop-last) (drop-while) (for) (interleave) (interpose) (iterate) (lazy-cat) (lazy-seq) (line-seq) (partition) (range) (remove) (repeat) (replicate) (take) (take-nth) (take-while)</code></pre>
+
+    </section>
+</section>
+
+<section>
+    <section>
+        <h2>Some data</h2>
+        <br>
+        <pre>
+                        (def data
+                          [{:year 2006
+                            :cars 39
+                            :buses-and-coaches 4
+                            :vans-and-lories 16
+                            :aeroplanes 35
+                            :trains 1
+                            :ships 1
+                            :motorbikes 1
+                            :none 2
+                            :dont-know 1}
+
+                           {:year 2007
+                            :cars 33
+                            ... }])
+
+        </pre>
+    </section>
+    <section>
+        <h2>Now try this</h2>
+
+        <ol>
+            <li>List all years in the series</li>
+            <li>Find years where cars were below 35</li>
+            <li>Find the year of highest value for aeroplanes</li>
+            <li>Create reconciliation that checks if each series sums up to 100</li>
+        </ol>
+        </ul>
+
+    </section>
+</section>
+
+
+
+<section>
+    <img src="img/clojure-logo.png" alt="Clojure Testdrive" height="250" width="250"/>
+
+    <h1>Questions?</h1>
+
+</section>
+
+</div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+
+    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+    // Optional libraries used to extend on reveal.js
+    dependencies: [
+    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+    { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' );
+    } },
+    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' );
+    } },
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
+    });
+
+</script>
+
+</body>
+</html>
