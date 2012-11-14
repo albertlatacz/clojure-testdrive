@@ -142,6 +142,10 @@
             <br>
 
             <li>More functions</li>
+            <br>
+            
+            <li>Macros</li>
+            <br>
         </ul>
     </section>
 
@@ -206,7 +210,19 @@
         <br>
 
         <pre style="font-size: 0.5em;text-align: center"><code class="clojure">(concat) (cycle) (distinct) (drop) (drop-last) (drop-while) (for) (interleave) (interpose) (iterate) (lazy-cat) (lazy-seq) (line-seq) (partition) (range) (remove) (repeat) (replicate) (take) (take-nth) (take-while)</code></pre>
+    </section>
+    
+    <section>
+        <h2>Macros</h2>
+        <br>
+        Because code is data...
+        <br>
 
+        <pre style="font-size: 0.8em"><code class="clojure">
+        (defmacro defn-str 
+          [fname args & body]
+            `(defn ~fname ~args
+              (str "Hello " ~@body)))</code></pre>
     </section>
 </section>
 
